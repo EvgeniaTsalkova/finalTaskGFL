@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Dealership - Search cars page</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/dist/css/bootstrap.css}">
+</head>
+<body style="background-color: floralwhite">
+
+<div>
+    <a th:href="@{/user_page}" type="button" class="btn btn-success btn-sm">Back to user's page</a>
+</div>
+
+<form th:method="POST" th:action="@{/filter_cars/{id}(id=${id})}" class="row g-3" th:object="${carFilter}">
+    <div class="col-md-4">
+        <label for="inputMake" class="form-label">Make</label>
+        <select th:field="*{make}" id="inputMake" class="form-select">
+            <option value="">-- Select Make --</option>
+            <option th:each="m : ${make}" th:value="${m.makeId}" th:text="${m.name}">
+            </option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label for="inputModel" class="form-label">Model</label>
+        <input type="text" th:field="*{model}" class="form-control" id="inputModel">
+    </div>
+    <div class="col-md-2">
+        <label for="inputYearMin" class="form-label">Year Min</label>
+        <input type="text" th:field="*{yearMin}" class="form-control" id="inputYearMin">
+    </div>
+    <div class="col-md-2">
+        <label for="inputYearMax" class="form-label">Year Max</label>
+        <input type="text" th:field="*{yearMax}" class="form-control" id="inputYearMax">
+    </div>
+    <div class="col-md-4">
+        <label for="inputColor" class="form-label">Color</label>
+        <input type="text" th:field="*{color}" class="form-control" id="inputColor">
+    </div>
+    <div class="col-md-4">
+        <label for="inputTransmission" class="form-label">Transmission</label>
+        <select th:field="*{transmission}" id="inputTransmission" class="form-select">
+            <option value="">-- Select Transmission --</option>
+            <option th:each="t : ${transmission}" th:value="${t}" th:text="${t}">
+            </option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label for="inputFuel" class="form-label">Fuel</label>
+        <select th:field="*{fuel}" id="inputFuel" class="form-select">
+            <option value="">-- Select Fuel --</option>
+            <option th:each="f : ${fuel}" th:value="${f}" th:text="${f}">
+            </option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label for="inputType" class="form-label">Car Type</label>
+        <select th:field="*{carType}" id="inputType" class="form-select">
+            <option value="">-- Select Car Type --</option>
+            <option th:each="ct : ${carType}" th:value="${ct}" th:text="${ct}">
+            </option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <label for="inputMileageMin" class="form-label">Mileage Min</label>
+        <input type="text" th:field="*{mileageMin}" class="form-control" id="inputMileageMin">
+    </div>
+    <div class="col-md-2">
+        <label for="inputMileageMax" class="form-label">Mileage Max</label>
+        <input type="text" th:field="*{mileageMax}" class="form-control" id="inputMileageMax">
+    </div>
+    <div class="col-md-2">
+        <label for="inputEngineDisplacementMin" class="form-label">Engine Displacement Min</label>
+        <input type="text" th:field="*{engineDisplacementMin}" class="form-control" id="inputEngineDisplacementMin">
+    </div>
+    <div class="col-md-2">
+        <label for="inputEngineDisplacementMax" class="form-label">Engine Displacement Max</label>
+        <input type="text" th:field="*{engineDisplacementMax}" class="form-control" id="inputEngineDisplacementMax">
+    </div>
+    <div class="col-md-4">
+        <label for="inputCondition" class="form-label">New/Used</label>
+        <select th:field="*{isNew}" id="inputCondition" class="form-select">
+            <option value="">-- Select Condition --</option>
+            <option th:value="'true'" th:text="'New'"></option>
+            <option th:value="'false'" th:text="'Used'"></option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <label for="inputPriceMin" class="form-label">Price Min</label>
+        <input type="text" th:field="*{priceMin}" class="form-control" id="inputPriceMin">
+    </div>
+    <div class="col-md-2">
+        <label for="inputPriceMax" class="form-label">Price Max</label>
+        <input type="text" th:field="*{priceMax}" class="form-control" id="inputPriceMax">
+    </div>
+
+    <input type="submit" value="Filter cars"/>
+</form>
+<br/><br/>
+
+<table class="table table-striped table-hover">
+    <thead class="table-primary">
+    <tr>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>Color</th>
+        <th>Transmission</th>
+        <th>Fuel</th>
+        <th>Type</th>
+        <th>Mileage</th>
+        <th>Engine displacement</th>
+        <th>New/Used</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c:${cars}">
+        <td th:text="${c.getMake().getName()}"></td>
+        <td th:text="${c.getModel()}"></td>
+        <td th:text="${c.getYear()}"></td>
+        <td th:text="${c.getColor()}"></td>
+        <td th:text="${c.getTransmission()}"></td>
+        <td th:text="${c.getFuel()}"></td>
+        <td th:text="${c.getCarType()}"></td>
+        <td th:text="${c.getMileage()}"></td>
+        <td th:text="${c.getEngineDisplacement()}"></td>
+        <td th:if="${c.getIsNew()} == true" th:text="'New'"></td>
+        <td th:if="${c.getIsNew()} == false" th:text="'Used'"></td>
+        <td th:text="${c.getDescription()}"></td>
+        <td th:text="${c.getPrice()}"></td>
+        <td>
+            <a th:href="@{/add_car_to_favorites/{id}(id=${id}, carId=${c.getCarId()})}" class="btn btn-sm btn-info">Add
+                to favorites</a>
+        </td>
+        <td>
+            <a th:href="@{/create_order/{id}(id=${id}, carId=${c.getCarId()})}" class="btn btn-sm btn-success">Order</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div th:if="${cars.isEmpty}">
+    <h2 th:text="'No cars'"></h2>
+</div>
+<script th:src="@{webjars/bootstrap/5.3.2/dist/js/bootstrap.bundle.js}"></script>
+</body>
+</html>

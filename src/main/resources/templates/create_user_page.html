@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Dealership - Create new user page</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/dist/css/bootstrap.css}">
+</head>
+<body style="background-color: floralwhite">
+<div style="text-align: center">
+    <h2>Enter your details</h2>
+</div>
+<form th:method="POST" th:action="@{/create_user}" th:object="${user}">
+    <div class="mb-3 row">
+        <label for="firstName" class="col-sm-2 col-form-label">First name: </label>
+        <div class="col-sm-4">
+            <input type="text" th:field="*{firstName}" class="form-control" id="firstName"/>
+        </div>
+        <div style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">FirstName Error</div>
+    </div>
+    <div class="mb-3 row">
+        <label for="lastName" class="col-sm-2 col-form-label">Last name: </label>
+        <div class="col-sm-4">
+            <input type="text" th:field="*{lastName}" class="form-control" id="lastName"/>
+        </div>
+        <div style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">LastName Error</div>
+    </div>
+    <div class="mb-3 row">
+        <label for="email" class="col-sm-2 col-form-label">Email: </label>
+        <div class="col-sm-4">
+            <input type="text" th:field="*{email}" class="form-control" id="email"/>
+        </div>
+        <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
+    </div>
+    <div class="mb-3 row">
+        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-4">
+            <input type="password" class="form-control" th:field="*{password}" id="inputPassword">
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="phoneNumber" class="col-sm-2 col-form-label">Phone number: </label>
+        <div class="col-sm-4">
+            <input type="text" th:field="*{phoneNumber}" class="form-control" id="phoneNumber"/>
+        </div>
+    </div>
+    <h4>Address: </h4>
+    <div class="mb-3 row">
+        <label for="country" class="col-sm-2 col-form-label">Country: </label>
+        <div class="col-sm-4">
+            <input type="text" th:field="*{address.country}" class="form-control" id="country"/>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="city" class="col-sm-2 col-form-label">City: </label>
+        <div class="col-sm-4">
+            <input type="text" th:field="*{address.city}" class="form-control" id="city"/>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="street" class="col-sm-2 col-form-label">Street: </label>
+        <div class="col-sm-4">
+            <input type="text" th:field="*{address.street}" class="form-control" id="street"/>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="postalCode" class="col-sm-2 col-form-label">Postal code: </label>
+        <div class="col-sm-4">
+            <input type="text" th:field="*{address.postalCode}" class="form-control" id="postalCode"/>
+        </div>
+    </div>
+    <div style="text-align: center">
+        <input type="submit" value="Sign up"/>
+    </div>
+</form>
+<script th:src="@{webjars/bootstrap/5.3.2/dist/js/bootstrap.bundle.js}"></script>
+</body>
+</html>

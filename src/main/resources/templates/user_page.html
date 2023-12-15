@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Dealership - User page</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/dist/css/bootstrap.css}">
+</head>
+<body style="background-color: floralwhite">
+<div class="d-grid gap-2 d-md-flex justify-content-md-end" style="padding: 15px">
+    <form th:action="@{/logout}" th:method="POST">
+        <input type="submit" value="Logout"/>
+    </form>
+</div>
+<div style="text-align: center">
+    <h2 style="color: darkslategray" th:text="'Hello, ' + ${user.firstName} + '!'">Hello!</h2>
+</div>
+<div th:if="${user.role.name() == 'ROLE_USER'}" style="padding: 15px">
+    <hr/>
+    <div>
+        <a th:href="@{/search_cars/{id}(id=${user.userId}, user=${user})}" type="button" class="btn btn-success btn-lg">Search
+            cars</a>
+    </div>
+    <br/>
+    <div>
+        <a th:href="@{/favorite_cars/{id}(id=${user.userId})}" type="button" class="btn btn-success btn-lg">Your
+            favorite cars</a>
+    </div>
+    <br/>
+    <div>
+        <a th:href="@{/car_requests/{id}(id=${user.userId})}" type="button" class="btn btn-success btn-lg">Your car
+            requests</a>
+    </div>
+    <br/>
+    <div>
+        <a th:href="@{/user_orders/{id}(id=${user.userId})}" type="button" class="btn btn-success btn-lg">Your orders</a>
+    </div>
+</div>
+<div th:if="${user.role.name() == 'ROLE_ADMIN'}" style="padding: 15px">
+    <hr/>
+    <div>
+        <a th:href="@{/create_car}" type="button" class="btn btn-success btn-lg">Add new car</a>
+    </div>
+    <br/>
+    <div>
+        <a th:href="@{/all_orders}" type="button" class="btn btn-success btn-lg">All orders</a>
+    </div>
+    <br/>
+    <div>
+        <a th:href="@{/car_requests}" type="button" class="btn btn-success btn-lg">All car requests</a>
+    </div>
+    <br/>
+    <div>
+        <a th:href="@{/all_cars}" type="button" class="btn btn-success btn-lg">All cars</a>
+    </div>
+</div>
+<script th:src="@{webjars/bootstrap/5.3.2/dist/js/bootstrap.bundle.js}"></script>
+</body>
+</html>

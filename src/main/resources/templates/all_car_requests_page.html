@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Dealership - Car requests</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/dist/css/bootstrap.css}">
+</head>
+<body style="background-color: floralwhite">
+<table class="table table-striped table-hover">
+    <thead class="table-primary">
+    <tr>
+        <th>Request Id</th>
+        <th>User</th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>Color</th>
+        <th>Transmission</th>
+        <th>Fuel</th>
+        <th>Type</th>
+        <th>Mileage</th>
+        <th>Engine displacement</th>
+        <th>New/Used</th>
+        <th>Creation date</th>
+        <th>Request status</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cr:${carRequests}">
+        <td th:text="${cr.getRequestId()}"></td>
+        <td th:text="${cr.getUser().firstName} + ' ' + ${cr.getUser().lastName}"></td>
+        <td th:text="${cr.getCar().getMake().getName()}"></td>
+        <td th:text="${cr.getCar().model}"></td>
+        <td th:text="${cr.getCar().year}"></td>
+        <td th:text="${cr.getCar().color}"></td>
+        <td th:text="${cr.getCar().getTransmission()}"></td>
+        <td th:text="${cr.getCar().getFuel()}"></td>
+        <td th:text="${cr.getCar().getCarType()}"></td>
+        <td th:text="${cr.getCar().mileage}"></td>
+        <td th:text="${cr.getCar().engineDisplacement}"></td>
+        <td th:if="${cr.getCar().getIsNew()} == true" th:text="'New'"></td>
+        <td th:if="${cr.getCar().getIsNew()} == false" th:text="'Used'"></td>
+        <td th:text="${cr.getCreatedAt()}"></td>
+        <td>
+            <form th:action="@{/update_status}" method="POST">
+                <input type="hidden" name="requestId" th:value="${cr.getRequestId()}"/>
+                <select name="newStatus">
+                    <option th:value="${cr.getStatus()}" th:text="${cr.getStatus()}">
+                    <option th:each="s : ${requestStatuses}" th:value="${s}" th:text="${s}">
+                    </option>
+                </select>
+                <button type="submit">Update Status</button>
+            </form>
+        </td>
+        <td th:text="${cr.getCar().price}"></td>
+    </tbody>
+</table>
+<script th:src="@{webjars/bootstrap/5.3.2/dist/js/bootstrap.bundle.js}"></script>
+</body>
+</html>

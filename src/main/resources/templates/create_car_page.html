@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Dealership - Create car page</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/dist/css/bootstrap.css}">
+</head>
+<body style="background-color: floralwhite">
+<form th:method="POST" th:action="@{/create_car}" class="row g-3" th:object="${car}">
+    <div class="col-md-4">
+        <label for="inputMake" class="form-label">Make</label>
+        <select th:field="*{make}" id="inputMake" class="form-select">
+            <option value="">-- Select Make --</option>
+            <option th:each="m : ${make}" th:value="${m.makeId}" th:text="${m.name}">
+            </option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label for="inputModel" class="form-label">Model</label>
+        <input type="text" th:field="*{model}" class="form-control" id="inputModel">
+    </div>
+    <div class="col-md-4">
+        <label for="inputYear" class="form-label">Year</label>
+        <input type="text" th:field="*{year}" class="form-control" id="inputYear">
+    </div>
+    <div class="col-md-4">
+        <label for="inputColor" class="form-label">Color</label>
+        <input type="text" th:field="*{color}" class="form-control" id="inputColor">
+    </div>
+    <div class="col-md-4">
+        <label for="inputTransmission" class="form-label">Transmission</label>
+        <select th:field="*{transmission}" id="inputTransmission" class="form-select">
+            <option value="">-- Select Transmission --</option>
+            <option th:each="t : ${transmission}" th:value="${t}" th:text="${t}">
+            </option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label for="inputFuel" class="form-label">Fuel</label>
+        <select th:field="*{fuel}" id="inputFuel" class="form-select">
+            <option value="">-- Select Fuel --</option>
+            <option th:each="f : ${fuel}" th:value="${f}" th:text="${f}">
+            </option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label for="inputType" class="form-label">Car Type</label>
+        <select th:field="*{carType}" id="inputType" class="form-select">
+            <option value="">-- Select Car Type --</option>
+            <option th:each="ct : ${carType}" th:value="${ct}" th:text="${ct}">
+            </option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label for="inputMileage" class="form-label">Mileage</label>
+        <input type="text" th:field="*{mileage}" class="form-control" id="inputMileage">
+    </div>
+    <div class="col-md-4">
+        <label for="inputEngine" class="form-label">Engine displacement</label>
+        <input type="text" th:field="*{engineDisplacement}" class="form-control" id="inputEngine">
+    </div>
+    <div class="col-md-4">
+        <label for="inputCondition" class="form-label">New/Used</label>
+        <select th:field="*{isNew}" id="inputCondition" class="form-select">
+            <option value="">-- Select Condition --</option>
+            <option th:value="'true'" th:text="'New'"></option>
+            <option th:value="'false'" th:text="'Used'"></option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label for="inputDescription" class="form-label">Price</label>
+        <input type="text" th:field="*{description}" class="form-control" id="inputDescription">
+    </div>
+    <div class="col-md-4">
+        <label for="inputPrice" class="form-label">Price</label>
+        <input type="text" th:field="*{price}" class="form-control" id="inputPrice">
+    </div>
+
+    <input type="submit" value="Add new car"/>
+</form>
+
+<script th:src="@{webjars/bootstrap/5.3.2/dist/js/bootstrap.bundle.js}"></script>
+</body>
+</html>

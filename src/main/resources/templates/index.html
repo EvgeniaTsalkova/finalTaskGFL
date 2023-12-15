@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Dealership - Start page</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/dist/css/bootstrap.css}">
+</head>
+<body style="background-color: floralwhite">
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <div style="padding: 15px">
+        <a href="/login" type="button" class="btn btn-primary btn-lg">Log in</a>
+    </div>
+    <div style="padding: 15px">
+        <a href="/create_user" type="button" class="btn btn-outline-primary btn-lg">Sign up</a>
+    </div>
+</div>
+<div style="text-align: center">
+    <h1>Car Dealership</h1>
+</div>
+
+<img src="img/red-ferrari.jpg" class="img-fluid" alt="Car photo"/>
+<script th:src="@{webjars/bootstrap/5.3.2/dist/js/bootstrap.bundle.js}"></script>
+</body>
+</html>

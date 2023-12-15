@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Dealership - User's car requests</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/dist/css/bootstrap.css}">
+</head>
+<body style="background-color: floralwhite">
+<div>
+    <a th:href="@{/user_page}" type="button" class="btn btn-success btn-sm">Back to user's page</a>
+</div>
+
+<div style="text-align: center">
+    <h1>Your car requests</h1>
+</div>
+<table class="table table-striped table-hover">
+    <thead class="table-primary">
+    <tr>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>Color</th>
+        <th>Transmission</th>
+        <th>Fuel</th>
+        <th>Type</th>
+        <th>Mileage</th>
+        <th>Engine displacement</th>
+        <th>New/Used</th>
+        <th>Creation date</th>
+        <th>Request status</th>
+        <th>X</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cr:${carRequests}">
+        <td th:text="${cr.getCar().getMake().getName()}"></td>
+        <td th:text="${cr.getCar().model}"></td>
+        <td th:text="${cr.getCar().getYear()}"></td>
+        <td th:text="${cr.getCar().color}"></td>
+        <td th:text="${cr.getCar().getTransmission()}"></td>
+        <td th:text="${cr.getCar().getFuel()}"></td>
+        <td th:text="${cr.getCar().getCarType()}"></td>
+        <td th:text="${cr.getCar().mileage}"></td>
+        <td th:text="${cr.getCar().engineDisplacement}"></td>
+        <td th:if="${cr.getCar().getIsNew()} == true" th:text="'New'"></td>
+        <td th:if="${cr.getCar().getIsNew()} == false" th:text="'Used'"></td>
+        <td th:text="${cr.getCreatedAt()}"></td>
+        <td th:text="${cr.status}"></td>
+        <td>
+            <a th:href="@{/cancel_request/{id}(id=${id}, requestId=${cr.requestId})}" class="btn btn-sm btn-warning">Cancel</a>
+        </td>
+    </tbody>
+</table>
+<div th:if="${carRequests.isEmpty}">
+    <h3 th:text="'No car requests'"></h3>
+</div>
+<hr/>
+<br/>
+<div style="text-align: center">
+    <a th:href="@{/create_request/{id}(id=${id})}" type="button" class="btn btn-success btn-lg">Create new car
+        request</a>
+</div>
+
+<script th:src="@{webjars/bootstrap/5.3.2/dist/js/bootstrap.bundle.js}"></script>
+</body>
+</html>
